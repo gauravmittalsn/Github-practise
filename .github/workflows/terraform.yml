@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: azure login
+        run: az login --service-principal --username 5435b58a-4bed-4d91-85d4-c5af004efe3f --password 8um8Q~5tvGNz5CjGiof3R9A-nSPvAshQN4JjGdCd --tenant dad9b541-ed1b-46b6-87db-4a65e300f324
+      - name: terraform init
+        run: terraform init
+
+      - name: plan
+        run: terraform plan
+
+      - name: apply
+        run: terraform apply -auto-approve
